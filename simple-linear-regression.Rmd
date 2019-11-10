@@ -1,0 +1,53 @@
+---
+title: "Simple Linear Regression"
+author: "Prisma Erika Lopez Jimenez"
+date: "11/9/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+### Load your packages
+library(MASS)
+library(ISLR)
+```
+
+```{r}
+### Make a linear model on select variables of the `Boston` dataset
+fix(Boston) # edit the `Boston` dataset in the `MASS` package
+attach(Boston) # associate the variables `medv` and `lstat` 
+# with the dataset `Boston` without incl. in the model code below:
+lm.fit=lm(medv~lstat) # linear model of the `Boston` data set where `medv` 
+# is the response and `lstat` is the predictor
+
+lm.fit # take a look at the linear model basics
+summary(lm.fit) # get a summary
+names(lm.fit) # what you can extract from the model `lm.fit`
+coef(lm.fit) # extract the coefficient values of the linear model 
+confint(lm.fit) # confidence intervals
+```
+
+```{r}
+### Plot the data and linear regression line for the model
+plot(lstat,medv)  # scatter plot of `lstat` vs. `medv`
+abline(lm.fit,lwd=3,col="red") # add linear regression line, 
+# color it red, and bold it 3x
+plot(lstat,medv,pch=20) # modify the dots on the scatter plot
+
+plot(1:20,1:20,pch=1:20)# example of plot() function implementation
+```
+
+```{r}
+### Create Diagnostic plots on the complete model
+par(mfrow=c(2,2)) # separate the grid as a 2 x 2 fit
+plot(lm.fit) # plot 4 diagnostic plots on the `lm.fit` model
+```
+```{r}
+### Compute the residuals from a linear regression fit
+plot(predict(lm.fit),residuals(lm.fit)) # compute residual method 1 note: residuals()
+plot(predict(lm.fit),rstudent(lm.fit)) # compute residual method 2 note: rstudent( )
+plot(hatvalues(lm.fit))
+which.max(hatvalues(lm.fit))
+```
+
