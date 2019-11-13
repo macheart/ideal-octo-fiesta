@@ -1,5 +1,5 @@
 ---
-title: "Simple Linear Regression"
+title: "linear regression"
 author: "Prisma Erika Lopez Jimenez"
 date: "11/9/2019"
 output:
@@ -51,3 +51,17 @@ plot(hatvalues(lm.fit))
 which.max(hatvalues(lm.fit))
 ```
 
+```{r Create mult. linear regression model on 2 predictors}
+lm.fit=lm(medv~lstat + age)
+summary(lm.fit)
+```
+
+```{r Create mult. linear regression model on 13 predictors}
+lm.fit=lm(medv~.,data=Boston) # note use of . to include all data variables in to the model as predictors
+summary(lm.fit) # 
+## Quantifiers of model fit:
+# RSE
+# R^2
+# F-statistic
+## Residul(s) is a measure of the errors asoc.
+```
